@@ -12,6 +12,16 @@ int isPAT(char s[]){
 	return 1;
 }
 
+int findFirst(char c, char s[]){
+	int i = 0;
+
+
+int isYES(char s[]){
+	int before_P, after_T;	
+
+
+
+}
 
 int main(){
 	/* input */
@@ -22,13 +32,17 @@ int main(){
 	while(i < N){
 		str = (char *)malloc(sizeof(char) * 101);
 		scanf("%s", str);
-		printf("[debug] str: %s\n", str);
+//		printf("[debug] str: %s\n", str);
 		strings[i] = str;
-		printf("[debug] isPAT: %d\n", isPAT(str));
+//		printf("[debug] isPAT: %d\n", isPAT(str));
 		i++;
 	}
 	
 
+
+	/* free memory */
+	for(int j = 0; j < N ;j++)
+		free(strings[j]);
 
 	return 1;
 }
