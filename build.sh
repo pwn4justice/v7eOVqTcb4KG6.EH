@@ -12,11 +12,11 @@ echo "clean:" >> Makefile
 printf "\t-rm main Makefile\n" >> Makefile
 
 # Compile the given .c file
-make
+make > /dev/null
 
 # Execute the binary file
 ./main
 
 # After Execution, delete all files, make this directory as clean as before ;)
-make clean
+make clean >/dev/null
 
