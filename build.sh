@@ -17,6 +17,6 @@ make
 # Execute the binary file
 ./main
 
-# After Execute, delete all files, make this directory as clean as before ;)
+# After Execution, delete all files, make this directory as clean as before ;)
 make clean
 
