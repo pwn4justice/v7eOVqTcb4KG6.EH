@@ -88,11 +88,15 @@ int main(){
 	int half_number = 0;
 
 	scanf("%d %c", &user_input, &user_symbol);
-	
+
 	top_line_number = find_top_line(user_input, &half_number);
 	left_cnt = user_input - half_number * 2 - 1;
 
 	print_star(top_line_number, user_symbol);
+
+	if (user_input > 0 && user_input < 7)
+		printf("%c\n", user_symbol);
+
 	printf("%d\n", left_cnt);
 
 	return 0;
