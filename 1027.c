@@ -5,16 +5,22 @@ int find_top_line(int num, int *half_num){
 	int t = num / 2;
 	int flag = 0;
 	if (num % 2 == 1){
+		if (num == 1) {
+			line_num = 0;
+			*half_num = 0;
+			return line_num;
+		}
+		if (num == 3) flag = 1;
 		while( t - line_num > 0 ){
 			t -= line_num;	
 			line_num += 2;
-			if (t % line_num == 0){
+			if (t - line_num <= 0 && t % line_num == 0){
 			       flag = 1;
-			       *half_num = num / 2;
 			       break;
 			}
 		}
 		if (flag) {
+		 	*half_num = num / 2;
 			return line_num;
 		}
 		return find_top_line(--num, half_num);
