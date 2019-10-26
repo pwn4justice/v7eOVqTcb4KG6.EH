@@ -5,16 +5,12 @@ int find_top_line(int num, int *half_num){
 	int t = num / 2;
 	int flag = 0;
 	if (num % 2 == 1){
-		if (num == 7){
-			*half_num = 3;
-			return line_num;
-		}
-
-		if (num < 7) {
+		if (num == 1 || num == 3) {
 			line_num = 0;
 			*half_num = 0;
 			return line_num;
 		}
+		//if (num == 3) flag = 1;
 
 		while( t - line_num > 0 ){
 			t -= line_num;	
@@ -24,16 +20,13 @@ int find_top_line(int num, int *half_num){
 			       break;
 			}
 		}
-
 		if (flag) {
 		 	*half_num = num / 2;
 			return line_num;
 		}
-
 		return find_top_line(--num, half_num);
 
 	}
-
 	return find_top_line(--num, half_num);
 }
 
@@ -42,17 +35,12 @@ void print_star(int stars){
 	int space = 0;
 	int t_space, t_stars;
 
-	if (stars == 0) return;
-
 	/* 1. descent print */
-	//printf("****** stars: %d **************\n", stars);
-
 	while(stars >= 1){
 		t_stars = stars;
 		t_space = space;
-
-		while( t_space-- ) printf(" ");
 		while(t_stars > 0){
+			while( t_space-- ) printf(" ");
 			printf("*");
 			t_stars--;
 		}
@@ -60,24 +48,23 @@ void print_star(int stars){
 		stars-=2;
 		space++;
 	}
-
-	/* 2. ascend print */
+/*
+	/ 2. ascend print 
 	stars = 3;
-	space-=2;
+	space--;
 	while( stars <= max ){
 		t_stars = stars;
 		t_space = space;
-
-		while( t_space-- ) printf(" ");
 		while( t_stars > 0 ){
+			while( t_space-- ) printf(" ");
 			printf("*");
 			t_stars--;
 		}
-
 		printf("\n");
 		stars+=2;
 		space--;
 	}
+*/
 }
 
 
@@ -99,8 +86,8 @@ int main(){
 	left_cnt = user_input - half_number * 2 - 1;
 	star_cnt = half_number * 2;
 
-	print_star(top_line_number);
-	printf("[debug] left stars: %d\n", left_cnt);
+	//print_star(top_line_number);
+	printf("\n%d", left_cnt);
 
 	return 0;
 }
