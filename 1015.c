@@ -15,6 +15,10 @@ typedef struct student{
 	struct student *next;
 }Stu, *SList;
 
+/* A global pointer of Stu */
+Stu *sword;
+
+
 //actually, i am goona using the Link_LIST!!! 
 void init(SList * head){
 	*head = (Stu *)malloc(sizeof(Stu));
@@ -61,11 +65,17 @@ int compare(Stu s1, Stu s2){
 	}
 }
 
-void insert(Stu *stu, int pos){
+//void insert(Stu *stu, int pos){
 	// pos == 1: front insert
 	// pos == 0: insert to next
 	
-}	
+//}	
+void insert(Stu *stu, Stu *position){
+	stu->next = position->next;
+	position->next->prev = stu;
+	position->next = stu;
+	stu->prev = position;
+}
 
 int isEmptyList(SList list){
 	if (list->prev == list->next) return 1;
@@ -83,13 +93,19 @@ int main(){
 	 **/
 	int i = 0, s_i = 0;
 	int N;
+
+	/* init a list */
+	int SList db;
+	init(&db);
 	
 	/* temparary data */
+	int searching = 1;
 	char id[10];
 	/* d => de_score, c => cai_score */
 	int d = 0, c = 0;
-	/* A pointer point to A student */
+	/* a few pointers point to student objects*/
 	Stu *stu;
+	Stu *before, *after;
 
 	/* start to solve */
 	scanf("%d %d %d", &N, &LowestScore, &HighScore);
@@ -110,14 +126,41 @@ int main(){
 		stu->dscore = d;
 		stu->cscore = c;
 
-		if (isEmptyList(Head)) {
+		if (isEmptyList(db)) {
 			/* insert to next */
+			insert(db, 1);	//1: represents insert backwards 
+			sword = db;
 			continue;
 		}
+	/* else: compare one by one and find an appropery position to insert */
+		int cmp_before = 0;
+		int cmp_after = 0;
+		while(searching){
+			before = sword;
+			after = sword->next;
 
-		/* else: 1. compare one by one and find an appropery position to insert */
+			cmp_before = compare(*before, *stu);
+			cmp_after = compare(*stu, *after);
 
-
+			//if(compare(*before, *stu) && compare(*stu, *after) ){
+			if(cmp_before && cmp_after){
+				//insert(stu, before, 1);
+				//or insert(stu, after, 0);
+				//api modified:
+				insert(stu, before);
+				sword = stu;
+				searching = 0;
+				continue;
+			}else if(cmp_after == 0){	
+				/* stu < after < before */
+				sword = after;
+			}else if(cmp_before == 0){
+				/* stu > before > after */
+				sword = after;
+			}else{
+				//do nothing
+			}
+		}
 
 		i++;
 	}
