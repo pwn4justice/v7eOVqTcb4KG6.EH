@@ -3,7 +3,6 @@
 int find_top_line(int num, int *half_num){
 	int line_num = 3;
 	int t = num / 2;
-	*half_num = t;
 	int flag = 0;
 	if (num % 2 == 1){
 		while( t - line_num > 0 ){
@@ -11,6 +10,7 @@ int find_top_line(int num, int *half_num){
 			line_num += 2;
 			if (t % line_num == 0){
 			       flag = 1;
+			       *half_num = num / 2;
 			       break;
 			}
 		}
